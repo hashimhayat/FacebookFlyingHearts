@@ -4,6 +4,7 @@ var heart1,heart2,heart3,snow, grid;
 var imgArr = [];
 var hearts = [];
 var flakes = [];
+var touches = [];
 var theCanvas, lastWidth = screenW;
 var fontSize = 50, pressed = true;
 
@@ -35,7 +36,7 @@ function draw() {
   background(255);
   displayText();
   
-  if (pressed){
+  if (pressed || touchIsDown){
     hearts = [];
     for (var h = 0; h < 40; h++){ hearts.push(new Heart());}
     pressed = false;
@@ -52,6 +53,10 @@ function draw() {
   }
   
   grid.display();
+  if (touches.length > 0) {
+    text('Touch at:'+ touches[0].x ,10,10);
+  }
+    
   
 }
 
@@ -61,7 +66,7 @@ function displayText(){
   fill("red");
   if (screenW < 400) { textSize(fontSize--);} else {textSize(50); fontSize = 50;}
   textFont("Helvetica");
-  var phrase = "I love you, New York.";
+  var phrase = "I love you, NY.";
   text(phrase,screenW/2-textWidth(phrase)/2,(screenH/2));
   fill("black");
   textSize(12);
